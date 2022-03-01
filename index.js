@@ -1,22 +1,29 @@
 const { app, BrowserWindow } = require('electron')
-
-
-const { format } = require('url')
-const { join } = require('path')
+const path = require('path')
 
 
 
-let win  
+const createWindow = () => {
+   const win = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+         preload: path.join(__dirname, 'preload.js')
+      },
+      autoHideMenuBar: true,
+   })
 
-function createWindow() { 
-   win = new BrowserWindow({width: 800, height: 600}) 
-   win.loadURL(format ({ 
-      pathname: join(__dirname, 'src/index.html'), 
-      protocol: 'file:',
-      slashes: true 
-   }))
-}  
+   win.loadFile('src/index.html')
+}
 
+app.whenReady().then(() => {
+   createWindow()
+ 
+   app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0) createWindow()
+   })
+})
 
-
-app.on('ready', createWindow) 
+app.on('window-all-closed', () => {
+   if (process.platform !== 'darwin') app.quit()
+})
