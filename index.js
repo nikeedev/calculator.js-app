@@ -1,9 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+const { app, BrowserWindow } = require('electron')
 
 
-import { format } from 'url' 
-import { join } from 'path'  
-
+const { format } = require('url')
+const { join } = require('path')
 
 
 
@@ -12,7 +11,7 @@ let win
 function createWindow() { 
    win = new BrowserWindow({width: 800, height: 600}) 
    win.loadURL(format ({ 
-      pathname: join(__dirname, 'index.html'), 
+      pathname: join(__dirname, 'src/index.html'), 
       protocol: 'file:',
       slashes: true 
    }))
