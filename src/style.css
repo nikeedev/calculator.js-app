@@ -1,0 +1,15 @@
+#text {
+    color: darkorange;
+}
+#calculator {
+    width: 100px;
+    font-family: Arial;
+    font-size: 34px;
+}
+body {
+    text-align: center;
+}
+html {
+    font-family: Arial;
+    background-color: deepskyblue;
+}
